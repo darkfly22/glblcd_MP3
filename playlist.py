@@ -25,7 +25,7 @@ class Playlist:
                 trackItem = track.rstrip().split(",")
 
             self.playlist.append(Track(trackItem[0],trackItem[1], trackItem[2], trackItem[3], trackItem[4],trackItem[5]))
-        print(self.playlist)    
+    
     
     def show_tracks(self):
         
@@ -41,42 +41,15 @@ class Playlist:
         songIndex = self.playlist.index(title)
         self.playlist.remove()
     
-    def save_playlist(self, filename):
+    def save_playlist(self, filename: str):
         
         try:
-            new = open(filename + ".txt", 'x')
-        except FileExistsError:
-            print("Playlist already exists, choose another name")
-        
-        else:
-            for track in self.playlist:
-                new.write(f"{track.title}, {track.artiste} {track.album} {track.duration} {track.genre}, {track.year}, \n")
-            new.close()
+            with open(filename + ".txt", 'x') as f:
+                for track in self.playlist:
+                    f.write()
+     
             
-    
-    def shuffle_playlist(self):
-        shuffle(self.playlist)
-    
-    def count_tracks(self):
-        print(f"There are {len(self.playlist)} in the playlist")
-        
-    def total_duration(self):
-        total = 0
-        for track in self.playlist:
-            duration = track.duration.split(":")
-            seconds = int(duration[0]) * 60 + int(duration[1])
-            total += seconds
-        
-        
-        print(f"The total duration of this playlist is {total//60} minutes, {total%60}seconds")         
-            
-        
-    def reset(self):
-        self.playlist = []
-        
-    def is_empty(self):
-        
-        return "Playlist is empty" if len(self.playlist) == 0 else "Playlist is not empty"
+   
 
 
 Playlist = Playlist()
